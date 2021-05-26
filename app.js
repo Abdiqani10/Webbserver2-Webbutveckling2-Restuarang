@@ -5,6 +5,7 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const session = require('express-session');
 
+
 const app = express();
 
 // Passport Config
@@ -19,6 +20,10 @@ mongoose.connect('mongodb://localhost/Login', {
 })
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
+
+
+app.use(express.static(__dirname +"\\views\\partials\\"))
+
 
 // EJS
 app.use(expressLayouts);
@@ -50,6 +55,7 @@ app.use(function(req, res, next) {
   res.locals.error = req.flash('error');
   next();
 });
+
 
 // Routes
 app.use('/', require('./routes/index.js'));
